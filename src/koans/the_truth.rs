@@ -1,4 +1,4 @@
 #[test]
 fn the_truth() {
-    assert!(__)
+    assert!(true)
 }

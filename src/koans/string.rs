@@ -4,7 +4,7 @@
 #[test]
 fn string_literals() {
     let string_slice = "Hello World";
-    assert!(string_slice == __);
+    assert!(string_slice == "Hello World");
 }
 
 // A String is a heap-allocated string in Rust.
@@ -14,7 +14,7 @@ fn growable_strings() {
     let mut string = String::new();
     string.push_str("Hello");
     string.push_str(" World");
-    assert!(string == __);
+    assert!(string == "Hello World");
 }
 
 // A string slice can be converted to a String using to_string
@@ -24,14 +24,14 @@ fn growable_strings() {
 fn growable_string_literals() {
     let mut mutable = "Foo".to_string();
     mutable.push_str("Bar");
-    assert!(mutable == __);
+    assert!(mutable == "FooBar");
 }
 
 // A String can be coerced into a slice by prefacing it with a &
 #[test]
 fn string_to_slice() {
     let string = "Can't stop me now".to_string();
-    let slice: &str = __;
+    let slice: &str = &string;
     assert!(slice == "Can't stop me now");
 }
 
@@ -41,7 +41,7 @@ fn strings_with_strs() {
     let hello = "Hello ".to_string();
     let world = "World";
 
-    assert!(hello + world == __);
+    assert!(hello + world == "Hello World");
 }
 
 // But two Strings require a & to coorce the second String
@@ -50,7 +50,7 @@ fn strings_with_strings() {
     let hello = "Hello ".to_string();
     let world = "World!".to_string();
 
-    let hello_world = __ + __;
+    let hello_world = hello + &world;
     assert!(hello_world == "Hello World!")
 }
 
@@ -60,14 +60,14 @@ fn strings_with_strings() {
 #[test]
 fn using_chars() {
     let string = "Anybody hungry?";
-    assert!(string.chars().nth(2) == __.chars().nth(0));
+    assert!(string.chars().nth(2) == "y".chars().nth(0));
 }
 
 // You can get a slice of a string using slicing syntax
 #[test]
 fn slicing_the_string() {
     let string = "Boom";
-    assert!(&string[0..2] == __);
+    assert!(&string[0..2] == "Bo");
 }
 
 // However these are BYTE offsets not character offsets -
@@ -76,7 +76,7 @@ fn slicing_the_string() {
 #[should_panic]
 fn slicing_the_byte() {
     let dog = "忠犬ハチ公";
-    let slice = &dog[0..2];
+    let _slice = &dog[0..2];
 }
 
 // You can truncate Strings
@@ -84,7 +84,7 @@ fn slicing_the_byte() {
 fn truncate_string() {
     let mut string = String::from("Hello World!");
     string.truncate(5);
-    assert!(string == __);
+    assert!(string == "Hello");
 }
 
 // You can pop Strings
@@ -92,7 +92,7 @@ fn truncate_string() {
 fn pop_string() {
     let mut string = String::from("Hello");
     string.pop();
-    assert!(string == __);
+    assert!(string == "Hell");
 }
 
 // You can insert and remove from a String (at byte position)
@@ -100,8 +100,8 @@ fn pop_string() {
 fn insert_and_remove_into_string() {
     let mut string = String::from("Hello");
     string.insert(2, 'e');
-    assert!(string == __);
+    assert!(string == "Heello");
 
     string.remove(2);
-    assert!(string == __);
+    assert!(string == "Hello");
 }

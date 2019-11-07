@@ -1,7 +1,7 @@
 // As the name implies, unsigned integers (u8, u16, u32, u64) cannot be negative
 #[test]
 fn unsigned_ints() {
-    assert!(u8::min_value() == __);
+    assert!(u8::min_value() == 0);
 }
 
 // Unsigned integers can be reduced only as far as their minimum value of 0
@@ -9,13 +9,13 @@ fn unsigned_ints() {
 fn sub_unsigned_int() {
     let mut num: u8 = 10;
     num -= 10;
-    assert!(num __ u8::min_value());
+    assert!(num == u8::min_value());
 }
 
 // Signed integers(i8, i16, i32, i64), on the other hand, can be negative
 #[test]
 fn signed_ints() {
-    assert!(i8::min_value() __ 0);
+    assert!(i8::min_value() < 0);
 }
 
 // Signed integers can be reduced below zero, as far as their minimum value.
@@ -24,7 +24,7 @@ fn signed_ints() {
 #[test]
 fn sub_signed_int() {
     let mut num: i8 = 0;
-    let negative: i8 = __;
+    let negative: i8 = -128;
     num += negative;
     assert!(num == i8::min_value());
 }
@@ -34,15 +34,15 @@ fn sub_signed_int() {
 fn add_numbers() {
     let mut sig: i8 = 0;
     let mut unsig: u8 = 0;
-    sig += __;
-    unsig += __;
+    sig += 127;
+    unsig += 255;
     assert!(sig == i8::max_value() && unsig == u8::max_value());
 }
 
 // Like any variable in Rust, integers are immutable unless declared otherwise
 #[test]
 fn mutating_ints() {
-    let num: i8 = 1;
+    let mut num: i8 = 1;
     num += 2;
     assert!(num == 3);
 }
@@ -51,7 +51,7 @@ fn mutating_ints() {
 #[test]
 fn referencing_values() {
     let num: i8 = 1;
-    __ = num;
+    let mut mut_num = num;
     mut_num += 1;
     assert!(num != mut_num);
 }
